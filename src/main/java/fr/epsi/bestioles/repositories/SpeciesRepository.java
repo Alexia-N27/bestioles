@@ -8,4 +8,6 @@ import java.util.List;
 
 @Repository
 public interface SpeciesRepository extends JpaRepository<Species, Integer> {
+    List<Species>findFirstByCommonName(String commonName);
+    List<Species>findByLatinNameIgnoreCase(String latinName);
 }

@@ -44,12 +44,12 @@ public class BestiolesApplication implements CommandLineRunner {
         animalRepository.save(animal);
 
 
-        // Recherche d'un Animal par son ID (par exemple, ID = 1)
+        // Recherche d'un Animal par son ID
         animalRepository.findById(1).ifPresent(animalFound -> {
             System.out.println("Animal trouvé : " + animalFound);
         });
 
-        // Suppression d'un Animal par son ID (par exemple, ID = 1)
+        // Suppression d'un Animal par son ID
         animalRepository.deleteById(1);
         System.out.println("Nombre d'animaux après suppression : " + animalRepository.count());
 
@@ -58,5 +58,12 @@ public class BestiolesApplication implements CommandLineRunner {
                 animalFound -> System.out.println("Animal toujours présent : " + animalFound),
                 () -> System.out.println("Animal avec ID 1 a bien été supprimé.")
         );
+
+        System.out.println("FIND FIRST SPECIES : " + this.speciesRepository.findFirstByCommonName("chat"));
+        System.out.println("FIND LIST SPECIES : " + this.speciesRepository.findByLatinNameIgnoreCase("Felis silvestris catus"));
+        System.out.println("FIND LIST PERSON : " + this.personRepository.findByFirstnameOrLastname("Henri", "Lamarque"));
+        System.out.println("FIND AGE SUP : " + this.personRepository.findByAgeGreaterThanEqual(18));
+        System.out.println("FIND ANIMAL BY SPECIES : " + this.animalRepository.findBySpecies_Id(4));
+        System.out.println("FIND ANIMAL BY COLOR : " + this.animalRepository.findByColor("Gris"));
     }
 }
